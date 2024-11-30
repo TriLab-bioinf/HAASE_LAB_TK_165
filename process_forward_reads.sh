@@ -24,7 +24,7 @@ fi
 cutadapt -b "file:primer_A.fasta" \
     --overlap 6 \
     -m 27 \
-    --discard-untrimmed ./raw_fastq/${SAMPLE}_L001_R1_001.fastq.gz | \
+    --discard-untrimmed ./raw_fastq/${SAMPLE}.R1.fastq.gz | \
     cutadapt -b "file:primer_B.fasta" \
         --overlap 6  \
         -m 27 - | \
@@ -46,10 +46,12 @@ echo "#" Mapping ${SAMPLE}
 echo "#############################"
 echo
 
+BOWTIE_GENOME_REF_INDEX=./GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index
+
 bowtie2 --end-to-end \
     --time \
     --threads 8  \
-    -x ./GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index/GCA_000001405.15_GRCh38_no_alt_analysis_set.fna.bowtie_index \
+    -x ${BOWTIE_GENOME_REF_INDEX} \
     -U ./cutadapt_trim/${SAMPLE}_step3.fastq | \
         samtools view -hb - | \
         samtools sort -T ${SAMPLE}.tmp \
