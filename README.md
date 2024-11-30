@@ -6,6 +6,6 @@ To process fastq files run `process_forward_reads.sh` from a Linux terminal as f
 # It is expected that fastq file names have the following format: ${SAMPLE_NAME}.R1.fastq.gz within the subdirectory raw_fastq
 # It is also necessary to set the variable ${BOWTIE_GENOME_REF_INDEX} in the process_forward_reads with the path to the bowtie2 index for the reference genome.
 
-bash process_forward_reads.sh ${SAMPLE_NAME}
+bash ./process_forward_reads.sh ${SAMPLE_NAME}
 ```
 
